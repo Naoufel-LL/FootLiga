@@ -86,7 +86,7 @@ const Matches = ({navigation,route}) => {
                 <SafeAreaView>
                    <ScrollView>
                  {matches.matches && <View style={{width:'100%',alignContent:'center',alignItems:'center'}}>
-                 <View style={{backgroundColor:Colors.main,width:'90%',borderRadius:10,justifyContent:'center',alignItems:'center',borderRadius:10,shadowColor: "#000",shadowOffset: {width: 0,height: 2,},shadowOpacity: 0.25,shadowRadius: 3.84,elevation: 5,padding:0,marginVertical:10}}>
+                 <View style={{width:'90%',borderRadius:10,justifyContent:'center',alignItems:'center',borderRadius:10,padding:0,marginVertical:10}}>
            <Image style={{width:180,height:110}} resizeMode='contain' source={{uri:matches?.competition?.emblem}}></Image>
            
            </View>
@@ -103,7 +103,7 @@ const Matches = ({navigation,route}) => {
                                     height="50"
                          uri={match.homeTeam.crest}></SvgUri> : <Image style={{width:50,height:50}} resizeMode='contain' source={{uri:match.homeTeam.crest}}></Image>
                        }
-                          <Text style={{fontFamily:'Poppins_400Regular',paddingVertical:10,fontSize:18}}>{match.homeTeam.shortName}</Text>
+                          <Text style={{fontFamily:'Poppins_400Regular',paddingVertical:10,fontSize:15}}>{match.homeTeam.shortName}</Text>
                           <Text style={{fontFamily:'Poppins_400Regular',color:Colors.main}}>{match.homeTeam.tla}</Text>
                           </View>
                            
@@ -115,6 +115,7 @@ const Matches = ({navigation,route}) => {
                                </View>
                                <View>
                                    <Text>Week {match.matchday}</Text>
+                                   <Text>{match.utcDate.slice(0,10)}</Text>
                                </View>
                            </View>
                            <View  style={{flexDirection:'column',alignItems:'center'}}>
@@ -122,7 +123,7 @@ const Matches = ({navigation,route}) => {
                              height="50"
                          uri={match.awayTeam.crest}></SvgUri> : <Image style={{width:50,height:50}} resizeMode='contain' source={{uri:match.awayTeam.crest}}></Image>
                        }
-                          <Text style={{fontFamily:'Poppins_400Regular',paddingVertical:10,fontSize:18}}>{match.awayTeam.shortName}</Text>
+                          <Text style={{fontFamily:'Poppins_400Regular',paddingVertical:10,fontSize:15}}>{match.awayTeam.shortName}</Text>
                           <Text style={{fontFamily:'Poppins_400Regular',color:Colors.main}}>{match.awayTeam.tla}</Text>
                           </View>  
                           
@@ -144,7 +145,7 @@ const Matches = ({navigation,route}) => {
                    <View key={match.id} style={{justifyContent:'center',alignItems:'center',alignContent:'center'}}>
                        <Text style={{color:Colors.main,fontFamily:'Poppins_400Regular'}}>{match.utcDate.slice(0,10)}</Text>
                        <TouchableOpacity>
-                       <View style={{flexDirection:'row',width:'90%',justifyContent:'space-around',alignItems:'center',backgroundColor:'#fff',borderRadius:10,shadowColor: "#000",shadowOffset: {width: 0,height: 2,},shadowOpacity: 0.25,shadowRadius: 3.84,elevation: 5,padding:30,marginVertical:10,alignContent:'center'}}>
+                       <View style={{flexDirection:'row',width:'90%',justifyContent:'space-around',alignItems:'center',backgroundColor:'#fff',borderRadius:10,shadowColor: "#000",shadowOffset: {width: 0,height: 2,},shadowOpacity: 0.25,shadowRadius: 3.84,elevation: 2,padding:30,marginVertical:10,alignContent:'center'}}>
                           <View  style={{flexDirection:'column',alignItems:'center'}}>
                           <Text style={{fontFamily:'Poppins_400Regular'}}>{match.homeTeam.shortName}</Text>
                           <Text style={{fontFamily:'Poppins_400Regular',color:Colors.main}}>{match.homeTeam.tla}</Text>
@@ -156,7 +157,7 @@ const Matches = ({navigation,route}) => {
                            <View style={{flexDirection:'column',alignItems:'center'}}>
                                <View style={{flexDirection:'row',padding:10}}>
                                <Text style={{fontFamily:'Poppins_700Bold',fontSize:20}}>{match.score.fullTime.home}</Text>
-                              <Text style={{fontFamily:'Poppins_700Bold',fontSize:20}}>-</Text>
+                              <Text style={{fontFamily:'Poppins_700Bold',fontSize:20}}>:</Text>
                               <Text style={{fontFamily:'Poppins_700Bold',fontSize:20}}>{match.score.fullTime.away}</Text>
                                </View>
                                <View>

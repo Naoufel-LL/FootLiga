@@ -30,7 +30,7 @@ const Placement = () => {
  const [data,setData] = useState([])
  const [table,setTable] = useState([])
  const [loading,setLoading] = useState(false)
-
+ const [players,setPlayers] = useState([])
  const getLeague = async () => {
   // get Data from Storage
   try {
@@ -38,11 +38,16 @@ const Placement = () => {
     if (data !== null) {
       console.log(data);
       const url = `http://api.football-data.org/v4/competitions/${data}/standings`
+      const url1 = `http://api.football-data.org/v4/competitions/${data}/scorers`
   axios.get(url,config).then((res)=>{
     setData(res.data)
     setTable(res.data.standings[0].table)
     setLoading(true)
     console.log(res.data.standings[0].table)
+})
+axios.get(url1,config).then((res)=>{
+  setPlayers(res.data.scorers)
+  setLoading(true)
 })
     }
   } catch (error) {
@@ -78,6 +83,7 @@ useEffect(()=>{
     return (
       <ScrollView style={{marginTop:"10%"}}>
          {!loading ? <ActivityIndicator></ActivityIndicator> : <ScrollView>
+         <Text style={{fontFamily:'Poppins_700Bold',padding:10,fontSize:25}}>Overview</Text>
             <DataTable  style={{padding:10}}>
               <DataTable.Header style={{backgroundColor:Colors.main,borderTopLeftRadius:10,borderTopRightRadius:10}}>
                 <DataTable.Title><Text style={{color:'#fff',fontFamily:'Poppins_400Regular'}}>Country</Text></DataTable.Title>
@@ -92,8 +98,8 @@ useEffect(()=>{
                 <DataTable.Cell><Text style={{fontFamily:'Poppins_400Regular'}}>{data.season.endDate}</Text></DataTable.Cell>
               </DataTable.Row>
             </DataTable>
-            <Text>Placement</Text>
-            <DataTable style={{padding:10,marginVertical:20}}>
+            <Text style={{fontFamily:'Poppins_700Bold',padding:10,fontSize:25}}>Placement</Text>
+            <DataTable style={{padding:10,marginVertical:0}}>
       <DataTable.Header style={{backgroundColor:Colors.main,borderTopLeftRadius:10,borderTopRightRadius:10}}>
         <DataTable.Title><Text style={{color:'#fff',fontFamily:'Poppins_400Regular'}}>#</Text></DataTable.Title>
         <DataTable.Title style={{flex:2}}><Text style={{color:'#fff',fontFamily:'Poppins_400Regular'}}>Team</Text> </DataTable.Title>
@@ -125,6 +131,33 @@ useEffect(()=>{
       </DataTable.Row>
           )
        })}
+      </DataTable>
+      <Text style={{fontFamily:'Poppins_700Bold',padding:10,fontSize:25}}>Top Scorers</Text>
+      <DataTable style={{padding:10}}>
+      <DataTable.Header style={{backgroundColor:Colors.main,borderTopLeftRadius:10,borderTopRightRadius:10}}>
+        <DataTable.Title style={{flex:4}}><Text style={{color:'#fff',fontFamily:'Poppins_400Regular'}}>Name</Text></DataTable.Title>
+        <DataTable.Title style={{flex:1}}><Text style={{color:'#fff',fontFamily:'Poppins_400Regular'}}>Team</Text> </DataTable.Title>
+        <DataTable.Title><Text style={{color:'#fff',fontFamily:'Poppins_400Regular'}}>Goals</Text></DataTable.Title>
+        <DataTable.Title><Text style={{color:'#fff',fontFamily:'Poppins_400Regular'}}>Assists</Text></DataTable.Title>
+        <DataTable.Title><Text style={{color:'#fff',fontFamily:'Poppins_400Regular'}}>Penalties</Text></DataTable.Title>
+      </DataTable.Header>
+      {players.map((player)=>{
+          return(
+            <DataTable.Row style={{borderWidth:0.2,backgroundColor:'#fff',shadowColor: "#000",shadowOffset: {width: 0,height: 2,},shadowOpacity: 0.25,shadowRadius: 3.84,elevation: 2}}  key={player.id}>
+            <DataTable.Cell style={{flex:4}}><Text style={{fontFamily:'Poppins_400Regular'}}>{player.player.name}</Text></DataTable.Cell>
+            <DataTable.Cell style={{flex:1}}><View style={{flexDirection:'row-reverse',alignContent:'center',alignItems:'center'}}>
+        <View>{player.team.crest.indexOf('.svg') != -1 ? <SvgUri  width="30"
+                             height="40"
+                         uri={player.team.crest}></SvgUri> : <Image style={{width:30,height:30}} resizeMode='cover' source={{uri:player.team.crest}}></Image>
+                       }</View>
+          </View></DataTable.Cell>
+        <DataTable.Cell><Text style={{fontFamily:'Poppins_400Regular'}}>{player.goals}</Text></DataTable.Cell>
+        <DataTable.Cell><Text style={{fontFamily:'Poppins_400Regular'}}>{player.assists ? player.assists : 0}</Text></DataTable.Cell>
+        <DataTable.Cell><Text style={{fontFamily:'Poppins_400Regular'}}>{player.penalties ? player.penalties : 0}</Text></DataTable.Cell>
+
+            </DataTable.Row>
+          )
+      })}
       </DataTable>
         </ScrollView> }
       </ScrollView>

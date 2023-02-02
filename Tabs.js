@@ -10,7 +10,7 @@ import HomeApp from './screens/HomeApp'
 export default function Tabs() {
     const Tab = createBottomTabNavigator()
   return (
-    <Tab.Navigator
+    <Tab.Navigator initialRouteName='Home'
       screenOptions={({ route }) => ({
         headerShown:false,
         headerTitleAlign:'center',

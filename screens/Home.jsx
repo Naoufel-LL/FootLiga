@@ -27,7 +27,6 @@ import {
     Poppins_900Black_Italic,
   } from '@expo-google-fonts/poppins';
 const Home = ({navigation}) => {
-   
    const [modal,setModal] = useState(false) 
    const [focused,setFocus] = useState()
    let [fontsLoaded] = useFonts({
