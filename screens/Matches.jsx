@@ -39,6 +39,7 @@ const Matches = ({navigation,route}) => {
       const url1 = `http://api.football-data.org/v4/competitions/${data}`
       axios.get(url,config).then((res)=>{
         setMatches(res.data)
+        console.log(matches.competition.code)
         setLoading(true)
   })
   axios.get(url1,config).then((res)=>{
@@ -84,14 +85,23 @@ const Matches = ({navigation,route}) => {
             <ScrollView  style={{marginVertical:30}}>             
                 {!loading ? <ActivityIndicator size={30} color={Colors.main}></ActivityIndicator> : 
                 <SafeAreaView>
+                     <View style={{width:'100%'}}>
+                    {matches?.competition?.code == "PD" &&  <Image style={{width:'100%',height:200}} resizeMode="cover" source={require('../assets/leagues/PDcover.jpg')}></Image>}
+                    {matches?.competition?.code == "WC" &&  <Image style={{width:'100%',height:200}} resizeMode="cover" source={require('../assets/leagues/qatarcover.jpg')}></Image>}
+                    {matches?.competition?.code == "PL" &&  <Image style={{width:'100%',height:200}} resizeMode="cover" source={require('../assets/leagues/PLcover.jpg')}></Image>}
+                    {matches?.competition?.code == "PPL" &&  <Image style={{width:'100%',height:200}} resizeMode="cover" source={require('../assets/leagues/PPLcover.jpg')}></Image>}
+                    {matches?.competition?.code == "SA" &&  <Image style={{width:'100%',height:200}} resizeMode="cover" source={require('../assets/leagues/SAcover.jpg')}></Image>}
+                    {matches?.competition?.code == "FL1" &&  <Image style={{width:'100%',height:200}} resizeMode="cover" source={require('../assets/leagues/FL1cover.jpg')}></Image>}
+                    {matches?.competition?.code == "DED" &&  <Image style={{width:'100%',height:200}} resizeMode="cover" source={require('../assets/leagues/DEDcover.jpg')}></Image>}
+                    {matches?.competition?.code == "CL" &&  <Image style={{width:'100%',height:200}} resizeMode="cover" source={require('../assets/leagues/UEFAcover.jpg')}></Image>}
+                    {matches?.competition?.code == "BL1" &&  <Image style={{width:'100%',height:200}} resizeMode="cover" source={require('../assets/leagues/BL1cover.jpg')}></Image>}
+
+                    </View>
                    <ScrollView>
                  {matches.matches && <View style={{width:'100%',alignContent:'center',alignItems:'center'}}>
-                 <View style={{width:'90%',borderRadius:10,justifyContent:'center',alignItems:'center',borderRadius:10,padding:0,marginVertical:10}}>
-           <Image style={{width:180,height:110}} resizeMode='contain' source={{uri:matches?.competition?.emblem}}></Image>
-           
-           </View>
                  </View>}
                  <View>
+            <Text style={{fontFamily:'Poppins_700Bold',padding:10,fontSize:25}}>Current Matchday</Text>
                     <ScrollView style={{margin:10}} showsHorizontalScrollIndicator={false} horizontal={true}>
                         {filtredMatches?.map((match)=>{
                               return(
