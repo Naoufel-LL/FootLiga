@@ -1,4 +1,4 @@
-import { View,Text, ScrollView, ActivityIndicator,Image, TouchableOpacity} from "react-native";
+import { View,Text, ScrollView, ActivityIndicator,Image, TouchableOpacity,StatusBar} from "react-native";
 import { DataTable } from "react-native-paper";
 import axios from "axios";
 import React from "react";
@@ -86,9 +86,14 @@ const WcStanding = ({navigation}) => {
       },[])
      if(fontsLoaded){
         return ( 
-            <ScrollView style={{marginTop:"10%"}}>
+            <ScrollView>
                 {!loading ? <ActivityIndicator></ActivityIndicator>:
                 <View>
+                  <StatusBar hidden />
+                    {data?.competition?.code == "WC" ? <View><Image style={{width:'100%',height:200}} resizeMode="cover" source={require('../assets/leagues/qatarcover.jpg')}></Image>
+</View> : 
+                    <Image style={{width:'100%',height:200}} resizeMode="cover" source={require('../assets/leagues/UEFAcover.jpg')}></Image>
+                    }
   <View>
           {table.map((stage)=>{
              return(

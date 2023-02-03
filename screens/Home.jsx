@@ -62,19 +62,19 @@ const Home = ({navigation}) => {
     };
      if(fontsLoaded){
       return(
-         <ScrollView style={{backgroundColor:Colors.back,paddingVertical:'15%'}}>
-         <View style={{alignItems:'center',padding:'3%'}}>
+         <ScrollView style={{backgroundColor:Colors.back}}>
+         <View style={{alignItems:'center',paddingTop:"10%"}}>
             <Text style={{fontFamily:'Poppins_700Bold',fontSize:30}}>Choose Your <Text style={{color:Colors.main}}>League</Text></Text>
          </View>
-         <ScrollView style={{width:'100%',height:'100%',marginVertical:'10%'}}>
+         <ScrollView style={{width:'100%',height:'100%',marginVertical:'5%'}}>
          <View style={{flexDirection:'row',justifyContent:'center',flexWrap:'wrap'}}>
          <TouchableOpacity onPress={()=>{setModal(true);setFocus(1);console.log(focused);AsyncStorage.setItem("league","WC");getLeague()}}>
            <View style={{width:160,borderColor: focused == 1 ? Colors.main : '#fff',borderWidth:5,margin:15,backgroundColor:'#fff',borderRadius:10,shadowColor: "#000",shadowOffset: {width: 0,height: 2,},shadowOpacity: 0.25,shadowRadius: 3.84,elevation: 5,alignItems:'center'}}>
                <Image resizeMode="contain" style={{width:110,height:140,padding:15}} source={require('../assets/leagues/qatar.png')}></Image>
             </View>
            </TouchableOpacity>
-           <TouchableOpacity>
-           <View style={{width:160,margin:15,backgroundColor:'#fff',borderRadius:10,shadowColor: "#000",shadowOffset: {width: 0,height: 2,},shadowOpacity: 0.25,shadowRadius: 3.84,elevation: 5,alignItems:'center'}}>
+           <TouchableOpacity onPress={()=>{setModal(true);setFocus(2);console.log(focused);AsyncStorage.setItem("league","CL");getLeague()}}>
+           <View style={{width:160,borderColor: focused == 2 ? Colors.main : '#fff',borderWidth:5,margin:15,backgroundColor:'#fff',borderRadius:10,shadowColor: "#000",shadowOffset: {width: 0,height: 2,},shadowOpacity: 0.25,shadowRadius: 3.84,elevation: 5,alignItems:'center'}}>
                <Image resizeMode="contain" style={{width:110,height:140,padding:15}} source={require('../assets/leagues/CL.png')}></Image>
             </View>
            </TouchableOpacity>
@@ -114,17 +114,17 @@ const Home = ({navigation}) => {
             </View>
             </TouchableOpacity>
          </View>
-         <Modal visible={modal}  animationType="fade" transparent={true}>
+         <Modal visible={modal}  animationType="slide" transparent={true}>
                 <View  style={{height:'100%',justifyContent:'flex-end'}}>
-                  <View style={{backgroundColor:'#fff',height:200,alignItems:'center',justifyContent:'center',borderTopLeftRadius:10,borderTopRightRadius:10,position:'relative'}}>
+                  <View style={{backgroundColor:'#fff',height:200,alignItems:'center',justifyContent:'center',borderTopLeftRadius:10,borderTopRightRadius:10,position:'relative',opacity:0.9}}>
                    <TouchableOpacity onPress={()=>{setModal(false)}}  style={{position:'absolute',right:2,top:2}}> 
                    <FontAwesome name='close' size={35}></FontAwesome>
                    </TouchableOpacity>
-                   {focused != 1 && <TouchableOpacity  onPress={()=>navigation.navigate("HomeApp")}  style={{width:'70%',alignContent:'center',alignItems:'center',backgroundColor:Colors.main,paddingVertical:20,borderRadius:10}}>
+                   {(focused != 1 && focused != 2) && <TouchableOpacity  onPress={()=>{navigation.navigate("HomeApp");setModal(false)}}  style={{width:'70%',alignContent:'center',alignItems:'center',backgroundColor:Colors.main,paddingVertical:20,borderRadius:10}}>
                      <Text style={{fontFamily:'Poppins_700Bold',fontSize:20,color:'#fff'}}>Choose League</Text>
                    </TouchableOpacity>}
-                   {focused == 1 && <TouchableOpacity  onPress={()=>navigation.navigate("HomeAppWc")}  style={{width:'70%',alignContent:'center',alignItems:'center',backgroundColor:Colors.main,paddingVertical:20,borderRadius:10}}>
-                     <Text style={{fontFamily:'Poppins_700Bold',fontSize:20,color:'#fff'}}>World Cup 2022</Text>
+                   {(focused == 1 || focused == 2 ) && <TouchableOpacity  onPress={()=>{navigation.navigate("HomeAppWc"),setModal(false)}}  style={{width:'70%',alignContent:'center',alignItems:'center',backgroundColor:Colors.main,paddingVertical:20,borderRadius:10}}>
+                     <Text style={{fontFamily:'Poppins_700Bold',fontSize:20,color:'#fff'}}>Choose League </Text>
                    </TouchableOpacity>}
                   </View>
                   </View>

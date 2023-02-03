@@ -85,7 +85,7 @@ const HomeApp = ({navigation}) => {
       },[])
      if(fontsLoaded){
         return ( 
-            <ScrollView style={{marginTop:"10%"}}>
+            <ScrollView>
                 {!loading ? <ActivityIndicator></ActivityIndicator>:
                 <ScrollView>
                     <View style={{width:'100%'}}>
@@ -198,16 +198,16 @@ const HomeApp = ({navigation}) => {
       
       </DataTable>
       <Text style={{fontFamily:'Poppins_700Bold',padding:10,fontSize:25}}>Teams</Text>
-         <View style={{flexDirection:'row',alignContent:'center',alignItems:'center',flexWrap:'wrap',justifyContent:'space-around'}}>
+         <View style={{flexDirection:'row',alignContent:'flex-start',alignItems:'center',flexWrap:'wrap',justifyContent:'space-around'}}>
             {teams.map((team)=>{
                 return(
-                    <TouchableOpacity>
-                        <View style={{width:160,height:110,backgroundColor:'#fff',borderRadius:10,shadowColor: "#000",shadowOffset: {width: 0,height: 2,},shadowOpacity: 0.25,shadowRadius: 3.84,elevation: 5,alignItems:'center',padding:20,margin:15,alignContent:'center',alignItems:'center'}}>
+                    <TouchableOpacity onPress={()=>{navigation.navigate('Team',{teamId:team.id})}}>
+                        <View style={{width:110,height:110,backgroundColor:'#fff',borderRadius:5,shadowColor: "#000",shadowOffset: {width: 0,height: 2,},shadowOpacity: 0.25,shadowRadius: 3.84,elevation:4,alignItems:'center',padding:20,margin:15,alignContent:'center',alignItems:'center'}}>
                          <View>{team.crest.indexOf('.svg') != -1 ? <SvgUri  width="50"
                              height="50"
                          uri={team.crest}></SvgUri> : <Image style={{width:50,height:50}} resizeMode='cover' source={{uri:team.crest}}></Image>
                        }</View>
-                        <Text style={{fontFamily:'Poppins_400Regular',paddingVertical:10,fontSize:15,textAlign:'center',color:Colors.main}}>  
+                        <Text style={{fontFamily:'Poppins_400Regular',paddingVertical:10,fontSize:10,textAlign:'center',color:Colors.main}}>  
                           {team.shortName}
                         </Text>
                        </View>

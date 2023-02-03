@@ -26,7 +26,7 @@ import {
     Poppins_900Black,
     Poppins_900Black_Italic,
   } from '@expo-google-fonts/poppins';
-const Placement = () => {
+const Placement = ({navigation}) => {
  const [data,setData] = useState([])
  const [table,setTable] = useState([])
  const [loading,setLoading] = useState(false)
@@ -81,8 +81,20 @@ useEffect(()=>{
   });
    if(fontsLoaded){
     return (
-      <ScrollView style={{marginTop:"10%"}}>
+      <ScrollView>
          {!loading ? <ActivityIndicator color={Colors.main}></ActivityIndicator> : <ScrollView>
+         <View style={{width:'100%'}}>
+                    {data?.competition?.code == "PD" &&  <Image style={{width:'100%',height:200}} resizeMode="cover" source={require('../assets/leagues/PDcover.jpg')}></Image>}
+                    {data?.competition?.code == "WC" &&  <Image style={{width:'100%',height:200}} resizeMode="cover" source={require('../assets/leagues/qatarcover.jpg')}></Image>}
+                    {data?.competition?.code == "PL" &&  <Image style={{width:'100%',height:200}} resizeMode="cover" source={require('../assets/leagues/PLcover.jpg')}></Image>}
+                    {data?.competition?.code == "PPL" &&  <Image style={{width:'100%',height:200}} resizeMode="cover" source={require('../assets/leagues/PPLcover.jpg')}></Image>}
+                    {data?.competition?.code == "SA" &&  <Image style={{width:'100%',height:200}} resizeMode="cover" source={require('../assets/leagues/SAcover.jpg')}></Image>}
+                    {data?.competition?.code == "FL1" &&  <Image style={{width:'100%',height:200}} resizeMode="cover" source={require('../assets/leagues/FL1cover.jpg')}></Image>}
+                    {data?.competition?.code == "DED" &&  <Image style={{width:'100%',height:200}} resizeMode="cover" source={require('../assets/leagues/DEDcover.jpg')}></Image>}
+                    {data?.competition?.code == "CL" &&  <Image style={{width:'100%',height:200}} resizeMode="cover" source={require('../assets/leagues/UEFAcover.jpg')}></Image>}
+                    {data?.competition?.code == "BL1" &&  <Image style={{width:'100%',height:200}} resizeMode="cover" source={require('../assets/leagues/BL1cover.jpg')}></Image>}
+
+                    </View>
             <Text style={{fontFamily:'Poppins_700Bold',padding:10,fontSize:25}}>Placement</Text>
             <DataTable style={{padding:10,marginVertical:0}}>
       <DataTable.Header style={{backgroundColor:Colors.main,borderTopLeftRadius:10,borderTopRightRadius:10}}>
@@ -98,7 +110,8 @@ useEffect(()=>{
       </DataTable.Header>
        {table.map((team)=>{
           return(
-            <DataTable.Row style={{borderWidth:0.2,backgroundColor:'#fff',shadowColor: "#000",shadowOffset: {width: 0,height: 2,},shadowOpacity: 0.25,shadowRadius: 3.84,elevation: 2}}  key={team.id}>
+            <TouchableOpacity>
+              <DataTable.Row style={{borderWidth:0.2,backgroundColor:'#fff',shadowColor: "#000",shadowOffset: {width: 0,height: 2,},shadowOpacity: 0.25,shadowRadius: 3.84,elevation: 2}}  key={team.id}>
         <DataTable.Cell><Text  style={{fontFamily:'Poppins_400Regular'}}>{team.position}</Text></DataTable.Cell>
         <DataTable.Cell style={{flex:2,}}><View style={{flexDirection:'row-reverse',alignContent:'center',alignItems:'center'}}>
         <View>{team.team.crest.indexOf('.svg') != -1 ? <SvgUri  width="30"
@@ -114,6 +127,7 @@ useEffect(()=>{
         <DataTable.Cell><Text  style={{color: team.goalDifference > 0 ? '#00ab41' : '#f01e2c',fontFamily:'Poppins_400Regular'}}>{team.goalDifference}</Text></DataTable.Cell>
 
       </DataTable.Row>
+            </TouchableOpacity>
           )
        })}
       </DataTable>

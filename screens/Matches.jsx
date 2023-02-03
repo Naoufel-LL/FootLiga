@@ -82,10 +82,10 @@ const Matches = ({navigation,route}) => {
    console.log(filtredMatches)
     if(fontsLoaded){
         return (
-            <ScrollView  style={{marginVertical:30}}>             
+            <ScrollView>             
                 {!loading ? <ActivityIndicator size={30} color={Colors.main}></ActivityIndicator> : 
-                <SafeAreaView>
-                     <View style={{width:'100%'}}>
+                     <View>
+                      <View style={{width:'100%'}}>
                     {matches?.competition?.code == "PD" &&  <Image style={{width:'100%',height:200}} resizeMode="cover" source={require('../assets/leagues/PDcover.jpg')}></Image>}
                     {matches?.competition?.code == "WC" &&  <Image style={{width:'100%',height:200}} resizeMode="cover" source={require('../assets/leagues/qatarcover.jpg')}></Image>}
                     {matches?.competition?.code == "PL" &&  <Image style={{width:'100%',height:200}} resizeMode="cover" source={require('../assets/leagues/PLcover.jpg')}></Image>}
@@ -170,18 +170,17 @@ const Matches = ({navigation,route}) => {
                               <Text style={{fontFamily:'Poppins_700Bold',fontSize:20}}>:</Text>
                               <Text style={{fontFamily:'Poppins_700Bold',fontSize:20}}>{match.score.fullTime.away}</Text>
                                </View>
-                               <View>
-                                   <Text>Week {match.matchday}</Text>
-                               </View>
+                               
                            </View>
+                           {match.awayTeam.crest.indexOf('.svg') != -1 ? <SvgUri width="50"
+                             height="50"
+                         uri={match.awayTeam.crest}></SvgUri> : <Image style={{width:50,height:50}} resizeMode='contain' source={{uri:match.awayTeam.crest}}></Image>
+                       }
                            <View  style={{flexDirection:'column',alignItems:'center'}}>
                           <Text style={{fontFamily:'Poppins_400Regular'}}>{match.awayTeam.shortName}</Text>
                           <Text style={{fontFamily:'Poppins_400Regular',color:Colors.main}}>{match.awayTeam.tla}</Text>
                           </View>  
-                          {match.awayTeam.crest.indexOf('.svg') != -1 ? <SvgUri width="50"
-                             height="50"
-                         uri={match.awayTeam.crest}></SvgUri> : <Image style={{width:50,height:50}} resizeMode='contain' source={{uri:match.awayTeam.crest}}></Image>
-                       }
+                         
                            
                            </View>
                        </TouchableOpacity>
@@ -189,7 +188,7 @@ const Matches = ({navigation,route}) => {
                 )
            })}
              </ScrollView>
-                </SafeAreaView>
+                     </View>
                 }   
             </ScrollView>
           );

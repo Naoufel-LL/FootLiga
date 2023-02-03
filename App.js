@@ -9,6 +9,7 @@ import MyTeam from './screens/MyTeam';
 import Placement from './screens/Placement';
 import TabsWc from './TabsWc';
 import WcStanding from './screens/WcStanding';
+import Team from './screens/Team';
 const Stack = createNativeStackNavigator();
 export default function App() {
   
@@ -16,6 +17,7 @@ export default function App() {
     <NavigationContainer>
       <Stack.Navigator initialRouteName='Home'>
        <Stack.Screen name="Home" component={Home} options={{headerShown:false}}></Stack.Screen>
+       <Stack.Screen name="Team" component={Team}></Stack.Screen>
        <Stack.Screen name="HomeAppWc" component={TabsWc} options={{headerShown:false}}></Stack.Screen>
        <Stack.Screen name="Matches" component={Matches} options={{headerShown:false}}></Stack.Screen>
        <Stack.Screen name="MyTeam" component={MyTeam} options={{headerShown:false}}></Stack.Screen>
